@@ -2,8 +2,8 @@
 #game {
     position: relative;
     text-align: center;
-    width: 630px;
-    height: 630px;
+    /*width: 630px;*/
+    /*height: 630px;*/
     margin: 0 auto;
     font-size: 0;
     border: 1px solid black;
@@ -23,8 +23,8 @@
 }
 
 .Cell {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
     margin: 0;
     padding: 0;
@@ -64,3 +64,13 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.Cell--hidden-door {
+    background-image: url("../img/field3.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.Cell--door {
+     background-image: url("../img/door.png");
+     background-repeat: no-repeat;
+     background-size: cover;
+ }
