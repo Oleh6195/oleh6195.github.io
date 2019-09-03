@@ -45,7 +45,27 @@
      background-size: cover;
  }
 .Cell--active {
-    background-image: url("../img/man.png");
+     background-image: url("../img/man.png");
+     background-repeat: no-repeat;
+     background-size: cover;
+ }
+.Cell--active-left {
+    background-image: url("../img/man-left.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.Cell--active-top {
+    background-image: url("../img/man-top.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.Cell--active-right {
+    background-image: url("../img/man-right.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.Cell--active-bottom {
+    background-image: url("../img/man-bottom.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
