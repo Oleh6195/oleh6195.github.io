@@ -102,7 +102,7 @@ const lose = () => stopGame(false);
 const win = () => stopGame(true);
 
 const checkNeighbour = (neighbour, enemy) => {
-    enemy && neighbour in [1] ? lose() : null;
+    enemy && [1,11,12,13,14].includes(neighbour) ? lose() : null;
     !enemy && neighbour === 2 ? lose() : null;
 };
 
