@@ -1,5 +1,15 @@
-
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("../img/bg.png");
+    /*background-position: px;*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 #game {
+    visibility: hidden;
     position: relative;
     text-align: center;
     /*width: 630px;*/
@@ -94,3 +104,17 @@
      background-repeat: no-repeat;
      background-size: cover;
  }
+.options{
+    display: flex;
+    justify-content: center;
+}
+#start{
+    border-radius: 30px;
+    cursor: pointer;
+    border: 2px solid rgb(186,186,186);
+    color: black;
+    background-color: white;
+    width: 12em;
+    height: 5em;
+
+}

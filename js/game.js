@@ -1,6 +1,6 @@
 let size = 12;
 
-const directions = {38: 11, 39:12, 40:13, 37:14};
+const directions = {38: 11, 39: 12, 40: 13, 37: 14};
 const cellTypes = {
     "-2": "border",
     "-1": "brick",
@@ -82,12 +82,12 @@ const stopGame = (win) => {
     document.removeEventListener('keyup', keyDownHandler);
     clearInterval(moveFunctionInterval);
 };
-const pauseGame = function () {
+const pauseGame = function (mess = true) {
     console.log(field);
     document.removeEventListener('keyup', keyDownHandler);
     clearInterval(moveFunctionInterval);
-    document.getElementById('message').style.display = 'block';
-    document.getElementById('message').innerText = "Pause";
+    mess ? document.getElementById('message').style.display = 'block': null;
+    mess ? document.getElementById('message').innerText = "Pause": null;
 
 };
 
@@ -102,7 +102,7 @@ const lose = () => stopGame(false);
 const win = () => stopGame(true);
 
 const checkNeighbour = (neighbour, enemy) => {
-    enemy && [1,11,12,13,14].includes(neighbour) ? lose() : null;
+    enemy && [1, 11, 12, 13, 14].includes(neighbour) ? lose() : null;
     !enemy && neighbour === 2 ? lose() : null;
 };
 
@@ -128,7 +128,8 @@ const move = (keycode, activeField, enemy) => {
         } else {
             checkNeighbour(field[activeField[0] + 1][activeField[1]], enemy)
         }
-    } if (keycode === 38) {
+    }
+    if (keycode === 38) {
         if (field[activeField[0] - 1][activeField[1]] === 0) {
             activeField[0] = activeField[0] - 1
         } else {
@@ -179,10 +180,10 @@ const destroy = (active) => {
     updateView(renderView(field));
     console.log(checkDoor());
     console.log(getField(2).length < 1);
-    !getActiveField() ? lose():null;
+    !getActiveField() ? lose() : null;
     checkWin()
 };
-const showDoor = () =>{
+const showDoor = () => {
     field[doorIndex[0]][doorIndex[1]] = 51;
     updateView(renderView(field));
     return true;
@@ -190,7 +191,7 @@ const showDoor = () =>{
 
 const checkDoor = () => field[doorIndex[0]][doorIndex[1]] === 0 || field[doorIndex[0]][doorIndex[1]] === 51
     ? showDoor() : null;
-const checkWin = () => checkDoor() && getField(2).length < 1 ? win(): null;
+const checkWin = () => checkDoor() && getField(2).length < 1 ? win() : null;
 
 const setBomb = () => {
     let active = [...getActiveField()];
@@ -199,12 +200,12 @@ const setBomb = () => {
     setTimeout(destroy, 2000, active);
 };
 
-const keyDownHandler = (event) =>{
+const keyDownHandler = (event) => {
     console.log(event.keyCode);
-    console.log([37,38,39,40].includes(event.keyCode));
+    console.log([37, 38, 39, 40].includes(event.keyCode));
     if (event.keyCode === 32) {
         setBomb()
-    }else if ([37,38,39,40].includes(event.keyCode)){
+    } else if ([37, 38, 39, 40].includes(event.keyCode)) {
         moveBomberman(event.keyCode)
     }
 };
@@ -217,11 +218,17 @@ const setDoor = () => {
     let index = randomIndex(getBricks());
     field[index[0]][index[1]] = 5;
 };
-const keyListener = function (){
+const keyListener = function () {
     switch (event.keyCode) {
-        case 49: pauseGame(); break;
-        case 50: resumeGame(); break;
-        case 82: window.location.reload(); break
+        case 49:
+            pauseGame();
+            break;
+        case 50:
+            resumeGame();
+            break;
+        case 82:
+            window.location.reload();
+            break
     }
 };
 
@@ -230,6 +237,14 @@ setDoor();
 let doorIndex = getDoor();
 document.addEventListener('keyup', keyDownHandler, false);
 document.addEventListener('keyup', keyListener, false);
+document.getElementById('start').addEventListener('click', () => {
+    document.getElementById('game').style.visibility = 'visible';
+    document.getElementById('start').style.display = 'none';
+    document.body.style.background = '#394F64';
+    resumeGame()
+
+});
 updateView(renderView(field));
 let moveFunctionInterval = setInterval(moveEnemies, 1000);
+pauseGame(false);
 
