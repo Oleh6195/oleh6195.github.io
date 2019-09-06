@@ -86,8 +86,8 @@ const pauseGame = function (mess = true) {
     console.log(field);
     document.removeEventListener('keyup', keyDownHandler);
     clearInterval(moveFunctionInterval);
-    mess ? document.getElementById('message').style.display = 'block': null;
-    mess ? document.getElementById('message').innerText = "Pause": null;
+    mess ? document.getElementById('message').style.display = 'block' : null;
+    mess ? document.getElementById('message').innerText = "Pause" : null;
 
 };
 
@@ -227,16 +227,15 @@ const keyListener = function () {
             resumeGame();
             break;
         case 82:
-            window.location.reload();
+            pauseGame();
+            startGame();
+            resumeGame();
             break
     }
 };
-
-let field = generateField(size);
-setDoor();
-let doorIndex = getDoor();
-document.addEventListener('keyup', keyDownHandler, false);
-document.addEventListener('keyup', keyListener, false);
+let doorIndex;
+let moveFunctionInterval;
+let field;
 document.getElementById('start').addEventListener('click', () => {
     document.getElementById('game').style.visibility = 'visible';
     document.getElementById('start').style.display = 'none';
@@ -244,7 +243,19 @@ document.getElementById('start').addEventListener('click', () => {
     resumeGame()
 
 });
-updateView(renderView(field));
-let moveFunctionInterval = setInterval(moveEnemies, 1000);
-pauseGame(false);
+const startGame = function () {
+    field = generateField(size);
+    setDoor();
+    doorIndex = getDoor();
+    document.addEventListener('keyup', keyDownHandler, false);
+    document.addEventListener('keyup', keyListener, false);
+    document.addEventListener('keyup', keyDownHandler, false);
+    document.addEventListener('keyup', keyListener, false);
+    updateView(renderView(field));
+    moveFunctionInterval = setInterval(moveEnemies, 1000);
+    pauseGame(false);
+};
+window.onload = function () {
+    startGame();
+};
 
