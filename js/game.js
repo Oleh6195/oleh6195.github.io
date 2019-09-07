@@ -243,7 +243,9 @@ document.getElementById('start').addEventListener('click', () => {
     resumeGame()
 
 });
-const startGame = function () {
+
+
+export const startGame = function () {
     field = generateField(size);
     setDoor();
     doorIndex = getDoor();
@@ -255,7 +257,3 @@ const startGame = function () {
     moveFunctionInterval = setInterval(moveEnemies, 1000);
     pauseGame(false);
 };
-window.onload = function () {
-    startGame();
-};
-
